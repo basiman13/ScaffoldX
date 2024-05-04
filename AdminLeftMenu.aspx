@@ -205,6 +205,12 @@
                     </div>
                 </div>
                
+                <div class="menu-item" url="Login.aspx">
+                    <div>
+                        <div class="icon"><i class="fa fa-user-circle" title="Logout"></i></div>
+                        <div class="ttl">Logout</div>
+                    </div>
+                </div>
                
                
                 
@@ -242,12 +248,15 @@
             //    $("#ifr").attr("src", "");
             //    return;
             //}
-
+            
             $(".slctd").removeClass("slctd");
             $(".menu-item > div:nth-child(2)").slideUp();
             $(this).parent().addClass("slctd");
 
             var url = $(this).parent().attr("url");
+            if (url=="Login.aspx") {
+                window.location.href = url;
+            }
             if (typeof (url) !== "undefined") {
                 $(".loading").show();
                 url = url;
@@ -278,6 +287,7 @@
             $(this).parent().addClass("slctd");
 
             var url = $(this).parent().attr("url");
+            
             if (typeof (url) !== "undefined") {
                 $(".loading").show();
                 url = url + "&eid=" + enterpriseId + "&pid=" + projectId + "&uid=" + userId + "&uk=" + userKey;
@@ -308,6 +318,8 @@
             $(".loading").show();
             url = url + "&eid=" + enterpriseId + "&pid=" + projectId + "&uid=" + userId + "&uk=" + userKey;
             $("#ifr").attr("src", url);
+
+            
         });
 
         $(".left-section .hdr i.fa-caret-left, .left-menu-holder > .menu-item:nth-child(1) > div:nth-child(1)").trigger("click");
