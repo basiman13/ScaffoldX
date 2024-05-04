@@ -126,6 +126,7 @@
         #toolbar-settingsTool {
               display:none !important;
         }
+     
     </style>
 </head>
 <body>
@@ -135,6 +136,7 @@
         <button runat="server" id="objfacesave" onserverclick="SaveObjFace" style="display:none;"></button>
 
             <div id="fullheight">
+                
                 <div id="box1">
                     <div style="height:30px;box-sizing:border-box;background-color:grey;color:#fff;padding-left: 5px;line-height: 28px;">
                         <span>3D Object Browser</span>
@@ -171,6 +173,14 @@
     <!-----Tree Js ------------->
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+       <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+     <!--- Jquery Popup box ---------->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css" />
+
 
     <script>
         var flag = <%=flag%>;
@@ -216,6 +226,8 @@
                 zoom_flag=1
             }
         });
+
+      
 
         var documentId = 'urn:' + urn + '';
         Autodesk.Viewing.Initializer(options, function onInitialized() {
