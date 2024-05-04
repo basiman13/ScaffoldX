@@ -192,7 +192,7 @@
           <div class="left-section">
             <div class="hdr"><span><i class="fa fa-tachometer"></i>Dashboard</span><i class="fa fa-caret-left"></i><i class="fa fa-caret-right"></i></div>
             <div class="left-menu-holder">
-                <div class="menu-item" url="UploadModel.aspx?">
+                <div class="menu-item" url="UploadModel_v2.aspx?">
                     <div>
                         <div class="icon"><i class="fa fa-hospital-o" title="Upload Model"></i></div>
                         <div class="ttl">Upload Model</div>
