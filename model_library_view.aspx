@@ -182,17 +182,38 @@
     padding-left: 10px;
     cursor:pointer;
         }
+           #publish-btn {
+          position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+        }
+        #publish-btn  button {
+                background-color: #f6af25 !important;
+    background-color: #0c2a51;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    font-size: 12px;
+    border-color: #f6af25;
+    color:#fff;
+        }
     </style>
     
 </head>
 <body>
     <form runat="server">
    
-        <div style="position: absolute;
+        
+        <div id="publish-btn">
+                    <button type="button" style="background-color:#0c2a51;background-color:#0c2a51;" class="btn" id="publish">Publish</button>
+                </div>
+
+        <!--<div style="position: absolute;
     right: 50px;
     top: 11px;display:none"><input style="border-radius: 5px;
     border: solid 1px #dadada;
-    padding: 5px;" id="lnkbx" value=""/></div>
+    padding: 5px;" id="lnkbx" value=""/></div>-->
 
          <div id="msgbox">
             <div><span id="msg-box-ttl">Collecting Data...</span></div>
@@ -227,14 +248,56 @@
     </form>
     
     <!--<script src="../onsite/support_files/JS/jscolor.js"></script>-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+     <!--- Jquery Popup box ---------->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css" />
     <script>
 
         var selectedObjId = 0;
 
         var all_3dLibrary = [];
 
+        var slctdLid = 0;
 
-   
+        $("#publish").click(function(){
+            swal({
+                title: "Thank You",
+                text: "Link Generation Successfully Completed",
+                icon: "success",
+            }).then((value) => {
+                 
+                $.confirm({
+                    icon: '',
+                    title: 'Generated Link',
+                    content: '<input type="text" class="form-control" id="temp-lnkbx" value="'+window.location.host+'/ScaffoldX/ViewModel.aspx?libId='+slctdLid+'">',
+                    type: 'blue',
+                    typeAnimated: true,
+                    buttons: {
+
+                        ok: {
+                            text: 'Copy',
+                            btnClass: '',
+                            action: function () {
+
+                                var copyText = document.getElementById("temp-lnkbx");
+                                copyText.select();
+                                copyText.setSelectionRange(0, 99999)
+                                document.execCommand("copy");
+                                alert("Copied");
+                            }
+                        }
+
+                    },
+                    boxWidth: '30%',
+                    useBootstrap: false,
+
+                });
+            });
+        });
+
        get_all_3dLibrary()
         function get_all_3dLibrary(){
             var url = "support3d_SQL.aspx?flag=39";
@@ -265,6 +328,7 @@
         
         $('.left-section').on('click', '.model-item', function () {
             var libId = $(this).attr("lib");
+            slctdLid = libId;
             $(".model-items .model-item").css("border-color", "#e4e4e4");
             $(".model-items .model-item").css("color", "#333");
             $(this).css("border-color", "#f6af25");
@@ -286,7 +350,6 @@
             var val = this.value;
             if (val!=0) {
                 $("#date-frame").attr("src",'library_model_data_collect.aspx?eid='+enterpriseId+'&pid='+projectId+'&uid='+userId+'&uk='+userKey+'&flag=0&libid='+val+'&isupdate=1')
-                $("#lnkbx").val('http://3.248.30.100/3d/ModelView.aspx?libid='+val+'')
             }
         });
         function updateObjid(objId){
@@ -364,5 +427,6 @@
            
         });
     </script>
+
 </body>
 </html>
